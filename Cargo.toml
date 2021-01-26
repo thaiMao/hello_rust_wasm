@@ -2,8 +2,15 @@
 name = "hello-wasm"
 version = "0.1.0"
 authors = ["thai <maot.tm@gmail.com>"]
+description = "Example of calling JS functions in Rust and vice versa"
+license = "MIT/Apache-2.0"
+repository = "https://github.com/thaiMao/hello_rust_wasm"
 edition = "2018"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
+[lib]
+crate-type = ["cdylib"]
+
 [dependencies]
+wasm-bindgen = "0.2"
