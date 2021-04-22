@@ -57,5 +57,15 @@ fn select_square(
     }
   }
     }
+
+pub struct BoardPlugin;
+
+impl Plugin for BoardPlugin {
+  fn build(&self, app: &mut AppBuilder) {
+    app
+      .init_resource::<SelectedSquare>()
+      .add_startup_system(create_board.system())
+      .add_system(color_squares.system())
+      .add_system(select_square.system());
   }
 }
