@@ -51,5 +51,5 @@ fn setup(
         transform: Transform::from_translation(Vec3::new(-2.0, 2.5, 5.0))
             .looking_at(Vec3::default(), Vec3::Y),
         ..Default::default()
-    });
+        .insert_bundle(PickingCameraBundle::default());
 }
