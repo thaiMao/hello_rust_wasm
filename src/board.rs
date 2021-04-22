@@ -42,6 +42,20 @@ fn color_squares(
     }
   }
 }
+fn select_square(
+  query: Query<(Entity, &Square, &Handle<StandardMaterial>, &Hover)>,
+  mouse_button_inputs: Res<Input<MouseButton>>,
+  mut selected_square: ResMut<SelectedSquare>,
+) {
+  if !mouse_button_inputs.just_pressed(MouseButton::Left) {
+    return;
+  }
+
+  for (entity, _square, _material_handle, hover) in query.iter() {
+    if hover.hovered() == true {
+      selected_square.entity = Some(entity);
+    }
+  }
     }
   }
 }
