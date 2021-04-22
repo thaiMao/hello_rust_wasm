@@ -1,6 +1,12 @@
 use bevy_mod_picking::*;
 use wasm_bindgen::prelude::*;
 
+mod pieces;
+use pieces::create_pieces;
+
+mod board;
+use board::create_board;
+
 #[wasm_bindgen]
 pub fn main() {
     let mut app = App::build();
