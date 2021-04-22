@@ -53,3 +53,5 @@ fn setup(
         ..Default::default()
         .insert_bundle(PickingCameraBundle::default());
 }
+
+                .insert_bundle(PickableBundle::default());
