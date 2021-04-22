@@ -23,7 +23,25 @@ pub fn create_board(
           transform: Transform::from_translation(Vec3::new(i as f32, 0., j as f32)),
           ..Default::default()
         })
-        .insert_bundle(PickableBundle::default());
+fn color_squares(
+  selected_square: Res<SelectedSquare>,
+  mut materials: ResMut<Assets<StandardMaterial>>,
+  query: Query<(Entity, &Square, &Handle<StandardMaterial>, &Hover)>,
+) {
+  for (entity, square, material_handle, hover) in query.iter() {
+    let material = materials.get_mut(material_handle).unwrap();
+
+    material.base_color = if hover.hovered() == true {
+      Color::rgb(0.8, 0.3, 0.3)
+    } else if Some(entity) == selected_square.entity {
+      Color::rgb(0.9, 0.1, 0.1)
+    } else if square.is_white() {
+      Color::rgb(1.0, 0.9, 0.9)
+    } else {
+      Color::rgb(0.0, 0.1, 0.1)
+    }
+  }
+}
     }
   }
 }
