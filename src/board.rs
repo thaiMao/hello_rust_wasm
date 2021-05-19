@@ -106,13 +106,16 @@ fn select_square(
     if let Ok((_sq_entity, square, _a, _b)) = square_query.get(square_entity) {
       if let Some(selected_piece_entity) = selected_piece.entity {
         log("selected_piece.entity exists");
+        let pieces_vec: Vec<Piece> = piece_query.iter_mut().map(|(_, piece)| *piece).collect();
         if let Ok((_piece_entity, mut piece)) = piece_query.get_mut(selected_piece_entity) {
-          log("query for selected_piece_entity return Ok result");
-          log("square position is...");
-          log_position(square.x, square.y);
-          log("attempt to assign");
-          piece.x = square.x;
-          piece.y = square.y;
+          if piece.is_move_valid((square.x, square.y), pieces_vec) {
+            log("query for selected_piece_entity return Ok result");
+            log("square position is...");
+            log_position(square.x, square.y);
+            log("attempt to assign");
+            piece.x = square.x;
+            piece.y = square.y;
+          }
         }
         // selected_square.entity = None;
         // selected_piece.entity = None;
